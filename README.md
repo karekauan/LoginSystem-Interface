@@ -1,2 +1,6 @@
 # LoginSystem-Interface
- Interface de login usando python e a biblioteca PySimpleGUI
+Desktop App para Login/Cadastro
+## Ferramentas:
+Python 3
+PySimpleGUI
+SQlitle3
