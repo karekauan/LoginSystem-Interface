@@ -41,7 +41,6 @@ def Login(): # Função para verificar campos vazios e conferir igualdade de cre
                 sg.popup_error('Credencial Inválida, tente novamente')
         except:
             sg.popup_error('Credencial Inválida, tente novamente')
-        bd.close()
     
     
 def Cadastrar(): # Função para verificar campos vazios e cadastrar as credenciais nos arquivos
@@ -52,7 +51,6 @@ def Cadastrar(): # Função para verificar campos vazios e cadastrar as credenci
         senha = Cadastro_values['Key']
         cursor.execute(f"INSERT INTO cadastros VALUES('{email}', '{senha}')")
         bd.commit()
-        bd.close()
         Cadastro_Tela.close()      
     else:
         sg.popup_error('Campo vazio, preencha e tente novamente')
