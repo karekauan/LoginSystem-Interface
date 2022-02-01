@@ -6,4 +6,4 @@ Python 3
 
 sqlitle 3
 
-PYQt 5
+PyQt 5
