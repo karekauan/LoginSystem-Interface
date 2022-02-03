@@ -16,13 +16,33 @@ cursor = bd.cursor()
 app = QtWidgets.QApplication(sys.argv) #Criando a variável de execução
 Screen_Log = uic.loadUi('Login.ui') #Atribuindo o respectivo arquivos da janela
 Screen_Cad = uic.loadUi('Cadastro.ui') #               |         |
-Screen_Logout = uic.loadUi('Logout.ui') #              |         |  
+Screen_Logout = uic.loadUi('Logout.ui') #              |         |
+Screen_Delete = uic.loadUi('Delete.ui') #              |         |   
+
+def Abre_Login():
+    Screen_Log.show()
+
+def Fecha_Login():
+    Screen_Log.close()
 
 def Abre_Cadastro():
     Screen_Cad.show()
     
 def Fecha_Cadastro():
     Screen_Cad.close()
+    Screen_Cad.Warning_Same_Pass.setText("")
+    
+def Abre_Logout():
+    Screen_Logout.show()
+    
+def Fecha_Logout():
+    Screen_Logout.close()
+
+def Abre_Delete():
+    Screen_Delete.show()
+    
+def Fecha_Delete():
+    Screen_Delete.close()
     
 def Same_User():
     User = Screen_Cad.Input_Name.text()
@@ -54,8 +74,8 @@ def Loga():
     cursor.execute("SELECT senha FROM cadastros WHERE email = '"+Email+"'")
     bd_Key = cursor.fetchall()
     if (Key == bd_Key[0][0]):
-        Screen_Logout.show()
-        Screen_Log.close()
+        Abre_Logout()
+        Fecha_Login()
                 
         cursor.execute("SELECT nome FROM cadastros WHERE email = '"+Email+"'")
         User_Name = cursor.fetchall()
@@ -63,6 +83,25 @@ def Loga():
             
     else:
         Screen_Log.Warning_Wrong_Credencial.setText("Senha Incorreta")
+        
+def Exclui():
+    Email = Screen_Delete.Input_Email_Delete.text()
+    Key = Screen_Delete.Input_Key_Delete.text()
+    try:
+        cursor.execute("SELECT senha FROM cadastros WHERE email = '"+Email+"'")
+        bd_Key = cursor.fetchall()
+        if (Key == bd_Key[0][0]):
+            cursor.execute("DELETE from cadastros WHERE email = '"+Email+"'")
+            bd.commit()
+            
+            Fecha_Delete()
+            Fecha_Logout()
+            Abre_Login()
+            
+        else:
+            Screen_Delete.Warning_Wrong_Key.setText("Senha Incorreta")
+    except:
+            Screen_Delete.Warning_Wrong_Key.setText("Email Incorreto")
 
 def Reseta_Cad():
     Screen_Cad.Input_Name.setText("")
@@ -73,7 +112,11 @@ def Reseta_Cad():
     
 def Reseta_Log():
     Screen_Log.Input_User.setText("")
-    Screen_Log.Input_Key.setText("")
+    Screen_Log.Input_Key.setText("") 
+    
+def Reseta_Del():
+    Email = Screen_Delete.Input_Email_Delete.setText("")
+    Key = Screen_Delete.Input_Key_Delete.setText("")
  
 def Logout(): #Função para deslogar da conta
     Screen_Logout.close()
@@ -106,12 +149,19 @@ def Login(): # Função para logar na conta
         Screen_Log.Warning_Wrong_Credencial.setText("Email Incorreto")
     Reseta_Log()
     
+def Excluir():
+    Exclui()
+    Reseta_Del() 
+    
 #Atribuindo funções aos Buttons#
 Screen_Log.Button_Log.clicked.connect(Login)
 Screen_Logout.Button_Out.clicked.connect(Logout)
 Screen_Log.Button_Reg.clicked.connect(Abre_Cadastro)
 Screen_Cad.Button_Back.clicked.connect(Fecha_Cadastro)
 Screen_Cad.Button_Cad.clicked.connect(Cadastro)
+Screen_Logout.Button_Delete.clicked.connect(Abre_Delete)
+Screen_Delete.Button_Back.clicked.connect(Fecha_Delete)
+Screen_Delete.Button_Delete.clicked.connect(Excluir)
 #------------------------------#    
 
 Screen_Log.show() #Exeibindo a tela inicial

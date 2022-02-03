@@ -20,7 +20,7 @@
    <widget class="QPushButton" name="Button_Out">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>20</x>
       <y>230</y>
       <width>281</width>
       <height>151</height>
@@ -59,7 +59,7 @@ font: 20pt &quot;Arial&quot;;</string>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>30</x>
       <y>270</y>
       <width>101</width>
       <height>81</height>
@@ -96,6 +96,25 @@ font: 20pt &quot;Arial&quot;;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Button_Delete">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>230</y>
+      <width>281</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(222, 0, 0);
+font: 20pt &quot;Arial&quot;;
+font: bold;
+border-radius: 5px;</string>
+    </property>
+    <property name="text">
+     <string>Deletar Conta</string>
     </property>
    </widget>
   </widget>
