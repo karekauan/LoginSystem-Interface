@@ -4,6 +4,6 @@ Desktop App para Login/Cadastro
 
 Python 3
 
-PySimpleGUI
+sqlitle 3
 
-SQlitle3
+PyQt 5
